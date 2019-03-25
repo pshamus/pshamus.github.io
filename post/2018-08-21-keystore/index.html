@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
+  <head>
+    
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>Keystore - Dusk Consulting</title>
+  <meta property="og:title" content="Keystore" />
+  <meta name="twitter:title" content="Keystore" />
+  <meta name="description" content="A simple way to keep secrets">
+  <meta property="og:description" content="A simple way to keep secrets">
+  <meta name="twitter:description" content="A simple way to keep secrets">
+  <meta name="author" content="Paul Shamus"/><script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "WebSite",
+    "name": "Dusk Consulting",
+    
+    "url": "https://pshamus.github.io"
+}
+</script><script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Organization",
+  "name": "",
+  "url": "https://pshamus.github.io"
+  
+  
+  
+  
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "item": {
+          "@id": "https://pshamus.github.io",
+          "name": "home"
+        }
+    },{
+        "@type": "ListItem",
+        "position": 3,
+        "item": {
+          "@id": "https://pshamus.github.io/post/2018-08-21-keystore/",
+          "name": "Keystore"
+        }
+    }]
+}
+</script><script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Article",
+  "author": {
+    "name" : "Paul Shamus"
+  },
+  "headline": "Keystore",
+  "description" : "A few years ago, I started working on a project to automate deployments of various types of servers. Some of the server types (app/web servers) were simple; others, like Active Directory domain controllers and SQL Servers were a bit more complicated. Those involved the use of some sort of secret - safe mode password, service account, etc. Supplying the needed secrets at runtime was not an option, as I wanted a fully automated solution.",
+  "inLanguage" : "en",
+  "wordCount": 1159,
+  "datePublished" : "2018-08-21T00:00:00",
+  "dateModified" : "2018-08-21T00:00:00",
+  "image" : "https://pshamus.github.io/images/dusk-logo.jpg",
+  "keywords" : [ "PowerShell" ],
+  "mainEntityOfPage" : "https://pshamus.github.io/post/2018-08-21-keystore/",
+  "publisher" : {
+    "@type": "Organization",
+    "name" : "https://pshamus.github.io",
+    "logo" : {
+        "@type" : "ImageObject",
+        "url" : "https://pshamus.github.io/images/dusk-logo.jpg",
+        "height" :  60 ,
+        "width" :  60
+    }
+  }
+}
+</script>
+
+<meta property="og:title" content="Keystore" />
+<meta property="og:description" content="A simple way to keep secrets">
+<meta property="og:image" content="https://pshamus.github.io/images/dusk-logo.jpg" />
+<meta property="og:url" content="https://pshamus.github.io/post/2018-08-21-keystore/" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Dusk Consulting" />
+  <meta name="twitter:title" content="Keystore" />
+  <meta name="twitter:description" content="A simple way to keep secrets">
+  <meta name="twitter:image" content="https://pshamus.github.io/images/dusk-logo.jpg" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@pshamus" />
+  <meta name="twitter:creator" content="@pshamus" />
+  <link href='https://pshamus.github.io/images/favicon.ico' rel='icon' type='image/x-icon'/>
+  <meta property="og:image" content="https://pshamus.github.io/images/dusk-logo.jpg" />
+  <meta name="twitter:image" content="https://pshamus.github.io/images/dusk-logo.jpg" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@pshamus" />
+  <meta name="twitter:creator" content="@pshamus" />
+  <meta property="og:url" content="https://pshamus.github.io/post/2018-08-21-keystore/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Dusk Consulting" />
+
+  <meta name="generator" content="Hugo 0.54.0" />
+  <link rel="alternate" href="https://pshamus.github.io/index.xml" type="application/rss+xml" title="Dusk Consulting"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"><link rel="stylesheet" href="https://pshamus.github.io/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+  <link rel="stylesheet" href="https://pshamus.github.io/css/highlight.min.css" /><link rel="stylesheet" href="https://pshamus.github.io/css/codeblock.css" /><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.css" integrity="sha384-h/L2W9KefUClHWaty3SLE5F/qvc4djlyR4qY3NUV5HGQBBW7stbcfff1+I/vmsHh" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/default-skin/default-skin.min.css" integrity="sha384-iD0dNku6PYSIQLyfTOpB06F2KCZJAKLOThS5HRe8b3ibhdEQ6eKsFf/EeFxdOt5R" crossorigin="anonymous">
+
+
+
+
+  </head>
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="https://pshamus.github.io">Dusk Consulting</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li>
+              <a title="Blog" href="/">Blog</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="About" href="/page/about/">About</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Tags" href="/tags">Tags</a>
+            </li>
+          
+        
+
+        
+
+        
+      </ul>
+    </div>
+
+    
+      <div class="avatar-container">
+        <div class="avatar-img-border">
+          <a title="Dusk Consulting" href="https://pshamus.github.io">
+            <img class="avatar-img" src="https://pshamus.github.io/images/dusk-logo.jpg" alt="Dusk Consulting" />
+          </a>
+        </div>
+      </div>
+    
+
+  </div>
+</nav>
+
+
+
+
+    
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+
+  
+  
+  
+
+
+
+
+
+
+  
+
+  <header class="header-section ">
+    
+    <div class="intro-header no-img">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="post-heading">
+              
+                <h1>Keystore</h1>
+              
+              
+              
+                
+                  <h2 class="post-subheading">A simple way to keep secrets</h2>
+                
+              
+              
+                <span class="post-meta">
+  
+  
+  <i class="fas fa-calendar"></i>&nbsp;Posted on August 21, 2018
+  
+  
+    &nbsp;|&nbsp;<i class="fas fa-clock"></i>&nbsp;6&nbsp;minutes
+  
+  
+    &nbsp;|&nbsp;<i class="fas fa-book"></i>&nbsp;1159&nbsp;words
+  
+  
+    &nbsp;|&nbsp;<i class="fas fa-user"></i>&nbsp;Paul Shamus
+  
+  
+</span>
+
+
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+    
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+        
+
+<p>A few years ago, I started working on a project to automate deployments of various types of servers. Some of the server types (app/web servers) were simple; others, like Active Directory domain controllers and SQL Servers were a bit more complicated. Those involved the use of some sort of secret - safe mode password, service account, etc. Supplying the needed secrets at runtime was not an option, as I wanted a fully automated solution. In addition, I needed the option to retrieve the secrets at a later date. As I wasn&rsquo;t the only one initiating the deployments, options like <code>Get-Credential | ConvertTo-SecureString -AsPlainText -Force | Export-CliXml</code> weren&rsquo;t an option due to per-user encryption. There had to be a better way.</p>
+
+<h1 id="the-early-years-keystore-v1">The Early Years - Keystore v1</h1>
+
+<p>After scouring the web, I stumbled across a <a href="https://github.com/remotex/Scripts/tree/master/keystore">GitHub repo by Johan Andersson</a> with a PowerShell module that laid out the foundation of what I turned into version 1.0 of the Keystore. The initial concepts were: - Use NTFS file share to store files - File names were SHA1 hashed to obscure the contents of the file - File must contain a username and password, separated by a colon - File was encrypted with a shared certificate - The file contained two lines of text: First line contained thumbprint of the certificate used to encrypt the second line; Second line contained username and password encrypted string Using a self-signed certificate that was only installed on workstations managed by our team, I was able to store a username/password combo and retrieve it as a PSCredential object, perfect for our automation tasks! At first there were only a handful of keystore credentials, but eventually I integrated the storing and retrieval of credentials into processes like BizTalk and SQL Server deployments, both of which require the use of domain users as service accounts.</p>
+
+<h2 id="shortcomings">Shortcomings</h2>
+
+<p>After a few months, I started to run into a few limitations with the initial implementation (v1):</p>
+
+<ol>
+<li><strong>Special characters</strong>. When a new service account is created, a random password is generated using the .NET API. However, certain characters in the password made it difficult to store, especially the colon character, as that was what one of the functions (Get/New-KeystoreCredential) was using as a string separator for the username and password. Before the string was encrypted, the username and password strings were combined with a colon separator. When the string was decrypted, it was split by the colon character and assumed there would only be two members of the resulting array. This, of course, caused the function to return the incorrect password. I put in a workaround to remove any characters we deemed &ldquo;restricted&rdquo; and especially unfriendly to XML. That at least kept me moving forward.</li>
+<li><strong>Search</strong>. There was no way to search for keystore credentials; you had to know the exact name as when it was created. Since the filenames were SHA-1 hashed, any variance in the casing when searching would mean an entry was not found. As a workaround, I forced the filename to uppercase both when searching and when saving. However, I couldn&rsquo;t (easily or quickly) get all Keystore credentials that belonged to, say, a particular server. This lead to limitation #3.</li>
+<li><strong>Speed</strong>. The functions to encrypt/decrypt the strings were extremely slow, and since a SHA-1 hash can&rsquo;t be &ldquo;un-hashed&rdquo;, the only way to find a group of keystore credentials was to, one by one, decrypt each file and match on the username, which I had set by default to be the same as the file name. Each decryption pass took, on average, about 400-500ms. At one point there were almost 3,000 files and it took more than 20 minutes to search through all of them!</li>
+<li><strong>Non-credential data</strong>. At this point the only type of data that could be stored was a username/password combo. This proved to be an issue when working with web app deployments that required having sensitive information as app settings in the web.config files. While technically possible to store the app setting strings in the username or password field, it just felt&hellip;wrong.</li>
+<li><strong>Separation of non-production vs. production credentials</strong>. Up to this point, only one certificate was used to encrypt/decrypt the credentials, and the certificate thumbprint was hardcoded in the module. However, I needed a way to allow for other users to get to certain secrets while keeping production ones separate.</li>
+</ol>
+
+<h1 id="keystore-v2">Keystore v2</h1>
+
+<p>In mid-2016, I started the process of redesigning the keystore with the hopes of solving issues 2-5; special characters weren&rsquo;t really an issue with the exclusion process I implemented. PowerShell 5.0 had been released and there were awesome new cmdlets that dealt with encryption (<code>Protect/Unprotect-CmsMessage</code>) that piqued my curiosity. In addition, the Azure KeyVault had also just been released and contained cool ideas of how I could improve my implementation of Keystore. Enter Keystore v2. It has been revamped to fix all of the limitations I ran into thus far. Here are some of the new features and improvements.</p>
+
+<h2 id="keystore-items">Keystore Items</h2>
+
+<p>There are now two Keystore item types: Generic Secret (simple string of text) and Credential (username/password pairing). For credential items, the item (file) name can be different than username.</p>
+
+<h2 id="file-format">File Format</h2>
+
+<p>The new file format uses JSON and is validated against a schema. This allows attributes about an item to be retrieve very quickly without having to decrypt the secret value.</p>
+
+<h2 id="encryption-decryption">Encryption/Decryption</h2>
+
+<p>The secret value is now encrypted using Protect-CmsMessage, which is much faster than the original method. In my tests, it went from ~500ms down to ~20-40ms. Also, since JSON is unfriendly to line breaks, the output of Protect-CmsMessage is converted to a Base-64 encoded string.</p>
+
+<h2 id="access-groups">Access Groups</h2>
+
+<p>Now, more than one certificate is supported when encrypting secrets. To make it easier to recall, you can assign a friendly name to a certificate thumbprint.</p>
+
+<h2 id="stores">Stores</h2>
+
+<p>Originally, the default Keystore store file path was hard-coded with the option to override via a path. Now, you can save one or more custom paths with a friendly name and refer to it by using the StoreName parameter. Two new built-in stores are now available: Self (see below) and CurrentDirectory. CurrentDirectory automatically makes whatever folder you are currently in the default location for storing Keystore items. You still have the option of specifying a file path using the FilePath parameter.</p>
+
+<h3 id="self-store">Self Store</h3>
+
+<p>One enhancement I added is similar in concept to what the Windows credential manager provides: the ability to have a per-user Keystore store where you can store your own secrets and not have other people have access to it. The Self store uses a self-signed document encryption certificate that is stored in the current user&rsquo;s Personal certificate store. The private key is marked as non-exportable, meaning even Administrators on the same system cannot decrypt your secrets.</p>
+
+<h1 id="future-directions">Future Directions</h1>
+
+<p>I plan to publish the module to the PowerShell Gallery at some point, but for now you can get the Keystore module from the <a href="https://github.com/pshamus/Keystore">GitHub repo</a>. Check it out and feel free to leave me feedback/comments/suggestions.</p>
+
+
+        
+          <div class="blog-tags">
+            
+              <a href="https://pshamus.github.io/tags/powershell/">PowerShell</a>&nbsp;
+            
+          </div>
+        
+
+        
+            <hr/>
+            <section id="social-share">
+              <div class="list-inline footer-links">
+                
+
+<div class="share-box" aria-hidden="true">
+    <ul class="share">
+      
+      <li>
+        <a href="//twitter.com/share?url=https%3a%2f%2fpshamus.github.io%2fpost%2f2018-08-21-keystore%2f&amp;text=Keystore&amp;via=pshamus" target="_blank" title="Share on Twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//plus.google.com/share?url=https%3a%2f%2fpshamus.github.io%2fpost%2f2018-08-21-keystore%2f" target="_blank" title="Share on Google Plus">
+          <i class="fab fa-google-plus"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fpshamus.github.io%2fpost%2f2018-08-21-keystore%2f" target="_blank" title="Share on Facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//reddit.com/submit?url=https%3a%2f%2fpshamus.github.io%2fpost%2f2018-08-21-keystore%2f&amp;title=Keystore" target="_blank" title="Share on Reddit">
+          <i class="fab fa-reddit"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fpshamus.github.io%2fpost%2f2018-08-21-keystore%2f&amp;title=Keystore" target="_blank" title="Share on LinkedIn">
+          <i class="fab fa-linkedin"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.stumbleupon.com/submit?url=https%3a%2f%2fpshamus.github.io%2fpost%2f2018-08-21-keystore%2f&amp;title=Keystore" target="_blank" title="Share on StumbleUpon">
+          <i class="fab fa-stumbleupon"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fpshamus.github.io%2fpost%2f2018-08-21-keystore%2f&amp;description=Keystore" target="_blank" title="Share on Pinterest">
+          <i class="fab fa-pinterest"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+  
+              </div>
+            </section>
+        
+
+        
+          
+          
+        
+      </article>
+
+      
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="https://pshamus.github.io/post/2018-07-23-hello-and-welcome/" data-toggle="tooltip" data-placement="top" title="Hello and welcome!">&larr; Previous Post</a>
+            </li>
+          
+          
+        </ul>
+      
+
+
+      
+        
+        
+      
+
+    </div>
+  </div>
+</div>
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+              <li>
+                <a href="https://github.com/pshamus" title="GitHub">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://twitter.com/pshamus" title="Twitter">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://linkedin.com/in/paulshamus" title="LinkedIn">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-linkedin fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+          <li>
+            
+            <a href="https://pshamus.github.io/index.xml" title="RSS">
+            
+              <span class="fa-stack fa-lg">
+                <i class="fas fa-circle fa-stack-2x"></i>
+                <i class="fas fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            
+              <a href="duskconsulting.com">Paul Shamus</a>
+            
+          
+
+          &nbsp;&bull;&nbsp;&copy;
+          
+            2018
+          
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="https://pshamus.github.io">Dusk Consulting</a>
+          
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="http://gohugo.io">Hugo v0.54.0</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer><script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.js" integrity="sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/contrib/auto-render.min.js" integrity="sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+<script src="https://pshamus.github.io/js/main.js"></script>
+<script src="https://pshamus.github.io/js/highlight.min.js"></script>
+<script> hljs.initHighlightingOnLoad(); </script>
+<script> $(document).ready(function() {$("pre.chroma").css("padding","0");}); </script><script> renderMathInElement(document.body); </script><script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.js" integrity="sha384-QELNnmcmU8IR9ZAykt67vGr9/rZJdHbiWi64V88fCPaOohUlHCqUD/unNN0BXSqy" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe-ui-default.min.js" integrity="sha384-m67o7SkQ1ALzKZIFh4CiTA8tmadaujiTa9Vu+nqPSwDOqHrDmxLezTdFln8077+q" crossorigin="anonymous"></script><script src="https://pshamus.github.io/js/load-photoswipe.js"></script>
+
+
+
+
+
+
+
+
+
+  </body>
+</html>
+
